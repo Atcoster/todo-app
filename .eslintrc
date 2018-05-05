@@ -1,0 +1,272 @@
+{
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"env": {
+		"browser": true,
+		"node": true
+	},
+	"rules": {
+		"comma-dangle": [
+			1,
+			"never"
+		],
+		"no-cond-assign": [
+			1,
+			"always"
+		],
+		"no-console": "off",
+		"no-constant-condition": 1,
+		"no-control-regex": 1,
+		"no-dupe-args": 1,
+		"no-dupe-keys": 1,
+		"no-duplicate-case": 1,
+		"no-empty-character-class": 1,
+		"no-empty": 1,
+		"no-ex-assign": 1,
+		"no-extra-boolean-cast": 1,
+		"no-extra-parens": [
+			1,
+			"all"
+		],
+		"no-extra-semi": 1,
+		"no-func-assign": 1,
+		"no-irregular-whitespace": 1,
+		"no-obj-calls": 1,
+		"no-regex-spaces": 1,
+		"no-sparse-arrays": 1,
+		"no-unreachable": 1,
+		"use-isnan": 1,
+		"valid-typeof": 1,
+		"no-unexpected-multiline": 1,
+		"accessor-pairs": [
+			1,
+			{
+				"getWithoutSet": true,
+				"setWithoutGet": true
+			}
+		],
+		"block-scoped-var": 1,
+		"default-case": 1,
+		"eqeqeq": [
+			1,
+			"smart"
+		],
+		"guard-for-in": 1,
+		"no-else-return": 1,
+		"no-eq-null": 1,
+		"no-eval": 1,
+		"no-extra-bind": 1,
+		"no-fallthrough": 1,
+		"no-floating-decimal": 1,
+		"no-implicit-coercion": [
+			1,
+			{
+				"boolean": true,
+				"number": true,
+				"string": true
+			}
+		],
+		"no-implied-eval": 1,
+		"no-invalid-this": 0,
+		"no-iterator": 1,
+		"no-labels": 1,
+		"no-lone-blocks": 1,
+		"no-loop-func": 1,
+		"no-multi-str": 1,
+		"no-new-func": 1,
+		"no-new-wrappers": 1,
+		"no-new": 1,
+		"no-octal-escape": 1,
+		"no-octal": 1,
+		"no-param-reassign": [2, {
+			"props": false
+		}],
+		"no-process-env": 1,
+		"no-proto": 1,
+		"no-redeclare": 1,
+		"no-return-assign": [
+			1,
+			"always"
+		],
+		"no-self-compare": 1,
+		"no-sequences": 1,
+		"no-useless-call": 1,
+		"no-with": 1,
+		"vars-on-top": 1,
+		"wrap-iife": [
+			1,
+			"any"
+		],
+		"yoda": [
+			2,
+			"never",
+			{
+				"onlyEquality": true
+			}
+		],
+		"strict": [
+			1,
+			"global"
+		],
+		"no-catch-shadow": 1,
+		"no-delete-var": 1,
+		"no-label-var": 1,
+		"no-shadow-restricted-names": 1,
+		"no-shadow": [
+			1,
+			{
+				"hoist": "all"
+			}
+		],
+		"no-undef-init": 1,
+		"no-undefined": 1,
+		"no-unused-vars": 1,
+		"no-use-before-define": [
+			1,
+			"nofunc"
+		],
+		"array-bracket-spacing": [
+			1,
+			"always",
+			{
+				"singleValue": true,
+				"objectsInArrays": true,
+				"arraysInArrays": true
+			}
+		],
+		"brace-style": [
+			1,
+			"1tbs",
+			{
+				"allowSingleLine": true
+			}
+		],
+		"camelcase": [
+			1,
+			{
+				"properties": "always"
+			}
+		],
+		"comma-spacing": [
+			1,
+			{
+				"after": true
+			}
+		],
+		"computed-property-spacing": [
+			1,
+			"always"
+		],
+		"eol-last": 1,
+		"func-names": 1,
+		"key-spacing": [
+			1,
+			{
+				"align": "colon",
+				"beforeColon": true
+			}
+		],
+		"lines-around-comment": [
+			1,
+			{
+				"beforeBlockComment": true,
+				"beforeLineComment": true
+			}
+		],
+		"max-nested-callbacks": [
+			1,
+			4
+		],
+		"new-cap": [
+			1,
+			{
+				"newIsCap": true
+			}
+		],
+		"new-parens": 1,
+		"no-mixed-spaces-and-tabs": [
+			1,
+			"smart-tabs"
+		],
+		"no-multiple-empty-lines": [
+			1,
+			{
+				"max": 1
+			}
+		],
+		"no-spaced-func": 1,
+		"no-trailing-spaces": [
+			1,
+			{
+				"skipBlankLines": false
+			}
+		],
+		"object-curly-spacing": [
+			1,
+			"always",
+			{
+				"arraysInObjects": true,
+				"objectsInObjects": true
+			}
+		],
+		"quotes": [
+			1,
+			"single",
+			"avoid-escape"
+		],
+		"semi-spacing": [
+			1,
+			{
+				"after": true
+			}
+		],
+		"space-before-blocks": [
+			1,
+			"always"
+		],
+		"space-in-parens": [
+			1,
+			"always",
+			{ "exceptions": ["()"] }
+		],
+		"space-infix-ops": 1,
+		"keyword-spacing": 1,
+		"spaced-comment": [
+			1,
+			"always",
+			{}
+		],
+		"arrow-parens": [
+			1,
+			"always"
+		],
+		"arrow-spacing": [
+			1,
+			{
+				"before": true,
+				"after": true
+			}
+		],
+		"no-const-assign": 1,
+		"no-this-before-super": 1,
+		"no-var": 1,
+		"max-len": [
+			1,
+			150,
+			{
+				"ignoreUrls": true
+			}
+		]
+	},
+	"plugins": [
+		"react"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended"
+	]
+}
