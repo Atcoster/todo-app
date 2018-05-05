@@ -1,0 +1,7 @@
+// Typography styling
+
+@mixin font-roboto($font-size, $font-weight) {
+	font-family: Roboto, sans-serif;
+	font-weight: $font-weight;
+	font-size: $font-size;
+}

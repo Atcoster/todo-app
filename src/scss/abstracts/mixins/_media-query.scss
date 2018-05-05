@@ -1,0 +1,38 @@
+//mixin media queries
+@mixin breakpoint($breakpoint) {
+	@if not variable-exists('breakpoints') or not map-has-key($breakpoints, $breakpoint) {
+		@warn '`#{$breakpoint}` is not a valid breakpoint name.';
+	}
+
+	@else {
+		@media ( min-width: map-get( $breakpoints, $breakpoint ) ) {
+			@content;
+		}
+	}
+}
+
+@mixin breakpoint-between($min, $max) {
+
+	// If both the min and max breakpoints exist in the map.
+	@if map-has-key($breakpoints, $min) and map-has-key($breakpoints, $max) {
+
+		// Get the min and max breakpoints.
+		$min-breakpoint: map-get($breakpoints, $min);
+		$max-breakpoint: map-get($breakpoints, $max);
+
+		// Write the media query.
+		@media ( min-width: $min-breakpoint ) and ( max-width: ( $max-breakpoint - 1 ) ) {
+			@content;
+		}
+	}
+
+	@else {
+		@if (map-has-key($breakpoints, $min) == false) {
+			@warn 'Your min breakpoint was invalid: #{$min}.';
+		}
+
+		@if (map-has-key($breakpoints, $max) == false) {
+			@warn 'Your max breakpoint was invalid: #{$upper}.';
+		}
+	}
+}

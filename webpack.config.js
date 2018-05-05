@@ -7,10 +7,11 @@ const POLYFILL               = '@babel/polyfill';
 
 module.exports = {
 	devtool: 'source-map',
+	mode: 'development',
 	target: 'web',
 	entry: [POLYFILL, './src/index.jsx'],
 	output: {
-		path: PATH.resolve(__dirname, 'build'),
+		path: PATH.resolve(__dirname, 'public'),
 		filename: 'bundle.js'
 	},
 	resolve: {

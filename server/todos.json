@@ -1,0 +1,24 @@
+{
+	"todos": [
+		{
+			"title": "My first todo",
+			"completed": false
+		},
+		{
+			"title": "This is my second todo",
+			"completed": false
+		},
+		{
+			"title": "Another todo todo",
+			"completed": false
+		},
+		{
+			"title": "I guess one more will be enough",
+			"completed": false
+		},
+		{
+			"title": "This is the last todo item",
+			"completed": true
+		}
+	]
+}
