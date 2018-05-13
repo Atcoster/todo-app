@@ -17,7 +17,7 @@ ROUTER.get( '/', ( req, res, next ) => {
 
 // Define the route to all todos (GET)
 ROUTER.get( '/todos', ( req, res, next ) => {
-	HELPER.actions.getAlltodos( req, res, next );
+	HELPER.actions.getAllTodos( req, res, next );
 });
 
 // Define the route to an todos by id (GET)

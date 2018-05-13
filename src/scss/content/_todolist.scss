@@ -1,0 +1,35 @@
+.task-list {
+	overflow: auto !important;
+
+	.item {
+
+		&__text {
+
+			&--striped {
+				text-decoration: line-through;
+				color: $gray--dark;
+			}
+		}
+
+		&__button {
+			color: $white !important;
+			margin-right: 10px !important;
+
+			&--green {
+				background-color: $green !important;
+
+				&:hover {
+					background-color: $green--dark !important;
+				}
+			}
+
+			&--red {
+				background-color: $red !important;
+
+				&:hover {
+					background-color: $red--dark !important;
+				}
+			}
+		}
+	}
+}

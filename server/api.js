@@ -1,7 +1,7 @@
 const BODY_PARSER  = require( 'body-parser' );
 const MONGOOSE     = require( 'mongoose' );
 const EXPRESS      = require( 'express' );
-const URI          = 'mongodb://localhost/todos';
+const URI          = 'mongodb://localhost/todoapp';
 const PORT         = process.env.PORT || 3001;
 const TODOS_ROUTES = require( './routers/todos.routers.js' );
 const APP          = EXPRESS();
