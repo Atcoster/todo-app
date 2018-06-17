@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
-import { todos, todosHasErrored, todosIsLoading } from './todos';
+import { todos } from './todos';
 
 export default combineReducers( {
-	todos,
-	todosHasErrored,
-	todosIsLoading
+	todos
 } );

@@ -1,9 +1,12 @@
 .task-list {
-	overflow: auto !important;
+	padding-top: 60px !important;
 
 	.item {
 
 		&__text {
+			word-wrap: break-word;
+			margin: 0 2em 0 1em;
+			padding: 0;
 
 			&--striped {
 				text-decoration: line-through;

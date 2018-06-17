@@ -6,6 +6,9 @@ import Checkbox from 'material-ui/Checkbox';
 import Button from 'material-ui/Button';
 import Delete from '@material-ui/icons/Delete';
 import Edit from '@material-ui/icons/Edit';
+import { toggleTodoStatus, deleteTask } from '../../js/actions';
+import DialogPopup from '../partials/DialogPopup';
+import Divider from 'material-ui/Divider';
 
 class TodoList extends Component {
 
@@ -13,56 +16,103 @@ class TodoList extends Component {
 		super( props );
 
 		this.state = {
-			todos   : [],
-			checked : []
+			dialogShow : false,
+			dialogType : '',
+			taskID     : '',
+			taskTitle  : ''
 		}
 	}
 
-	handleCheckToggle( value ) {
+	handleCheckToggle( event ) {
+		this.props.toggleTodoStatus( event.target );
 	}
 
 	sortTasksByCompleted( todos ) {
-		return todos.sort(( a, b ) => a.completed === b.completed ? 0 : a ? 1 : -1 );
+		return todos.sort(( a, b ) => a.completed - b.completed );
+	}
+
+	deleteTask( del ) {
+		if ( del ) this.props.deleteTodo( this.state.taskID );
+
+		this.resetState();
+	}
+
+	showDialog( data ) {
+		console.log( data );
+		this.setState( {
+			dialogType : data.type,
+			dialogShow : true,
+			taskID     : data.id,
+			taskTitle  : data.text !== '' ? data.text : this.state.taskTitle
+		} )
+	}
+
+	resetState() {
+		this.setState( {
+			dialogShow : false,
+			dialogType : '',
+			taskID     : '',
+			taskTitle  : ''
+		} )
 	}
 
 	render() {
 		let tasks = this.sortTasksByCompleted( this.props.todos );
+		let showDialogPopup = this.state.dialogShow;
 
 		return (
-			<List component="nav" className="task-list">
-			{
-				tasks.map(( task, index ) => {
-					let checked = task.completed || this.state.checked.indexOf( index ) !== -1 ? 'item__text--striped' : '';
+			<Fragment>
+				<List component="nav" className="task-list">
+				{
+					tasks.map(( task, index ) => {
+						let checked = task.completed ? 'item__text--striped' : '';
 
-					return (
-						<Fragment key={index}>
-							<ListItem className="item" divider>
-								<Checkbox checked={task.completed} color="default" onChange={this.handleCheckToggle.bind( this )}/>
+						return (
+							<ListItem key={index} className="item" divider>
+								<Checkbox id={task._id} checked={task.completed} color="default" onChange={this.handleCheckToggle.bind( this )}/>
 								<ListItemText className={`item__text ${checked}`} primary={task.title} />
-								<Button variant="raised" className="item__button item__button--green">Edit<Edit /></Button>
-								<Button variant="raised" className="item__button item__button--red">Delete<Delete /></Button>
+								<Divider inset />
+								<Button variant="raised"
+									className="item__button button--green"
+									onClick={this.showDialog.bind( this, { id : task._id, type : 'edit', text : task.title } )}>
+										Edit <Edit />
+								</Button>
+								<Button variant="raised"
+									className="item__button button--red"
+									onClick={this.showDialog.bind( this, { id : task._id, type : 'delete' } )}>
+										Delete <Delete />
+								</Button>
 							</ListItem>
-						</Fragment>
-					);
-				} )
-			}
-			</List>
+						);
+					} )
+				}
+				</List>
+				{
+					showDialogPopup ?	<DialogPopup data={this.state} deleteTask={this.deleteTask.bind( this )}/> : null
+				}
+			</Fragment>
 		);
 	}
+
 }
 
 TodoList.propTypes = {
-	todos      : PropTypes.array.isRequired,
-	hasErrored : PropTypes.bool.isRequired,
-	isLoading  : PropTypes.bool.isRequired
+	todos            : PropTypes.array.isRequired,
+	toggleTodoStatus : PropTypes.func.isRequired,
+	deleteTodo       : PropTypes.func.isRequired
 };
 
 const mapStateToProps = ( state ) => {
 	return {
-		todos      : state.todos,
-		hasErrored : state.todosHasErrored,
-		isLoading  : state.todosIsLoading
+		todos : state.todos
 	};
 };
 
-export default connect( mapStateToProps )( TodoList );
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		toggleTodoStatus : ( id ) => dispatch( toggleTodoStatus( id )),
+		deleteTodo       : ( id ) => dispatch( deleteTask( id ))
+	};
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( TodoList );

@@ -8,14 +8,9 @@ body {
 	font-family: Roboto, sans-serif;
 	font-weight: 300;
 	color: $blue;
-	overflow: hidden;
 	scroll-behavior: auto;
 	font-size: 1.02vw;
 	line-height: 1.5vw;
-}
-
-.root {
-	height: $screen--height;
 }
 
 ul {

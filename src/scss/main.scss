@@ -12,7 +12,9 @@
 
 // Layouts
 @import 'layouts/header';
-@import 'layouts/footer';
 
 // content
 @import 'content/todolist';
+
+// partials
+@import 'partials/dialogs'

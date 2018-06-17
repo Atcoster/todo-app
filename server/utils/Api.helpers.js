@@ -18,7 +18,7 @@ let actions = {
 	
 		NEW_TODO.save()
 		.then( todo => {
-			res.send( 'TODO saved to database' );
+			res.send( todo );
 		})
 		.catch( err => {
 			res.status( 400 ).send( err );

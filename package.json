@@ -27,7 +27,9 @@
 	},
 	"dependencies": {
 		"@material-ui/icons": "^1.0.0-beta.43",
+		"axios": "^0.18.0",
 		"material-ui": "^1.0.0-beta.44",
+		"npm": "^6.0.1",
 		"react": "^16.3.2",
 		"react-dom": "^16.3.2",
 		"react-fontawesome": "^1.6.1",
@@ -60,6 +62,7 @@
 		"node-sass": "^4.8.3",
 		"nodemon": "^1.15.1",
 		"postcss-loader": "^2.1.3",
+		"redux-devtools-extension": "^2.13.2",
 		"sass-loader": "^6.0.6",
 		"style-loader": "^0.20.1",
 		"stylelint": "^9.1.3",

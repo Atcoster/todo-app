@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Header, Footer } from './layouts';
+import { Header } from './layouts';
 import { TodoList } from './content';
-import { todosFetchData } from '../js/actions/todos';
+import { todosFetchData } from '../js/actions/index.js';
 
 class App extends Component {
 
 	componentWillMount() {
-		this.props.fetchData( 'http://localhost:3001/api/todos/' );
+		this.props.fetchData( '/todos' );
 	}
 
 	render() {
@@ -16,7 +16,6 @@ class App extends Component {
 			<Fragment>
 				<Header />
 				<TodoList />
-				<Footer />
 			</Fragment>
 		);
 	}
