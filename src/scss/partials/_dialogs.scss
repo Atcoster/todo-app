@@ -14,5 +14,13 @@
 		&:hover {
 			background-color: $red--dark !important;
 		}
+  }
+  
+  &--gray {
+		background-color: $gray--light !important;
+
+		&:hover {
+			background-color: $gray--dark !important;
+		}
 	}
 }

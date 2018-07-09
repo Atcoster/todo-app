@@ -48,12 +48,12 @@ class DialogPopup extends Component {
 					<DialogActions>
 						<Button variant="raised"
 										onClick={this.handleConfirm.bind( this, { delete : false } )}
-										color="primary" className="button--red">
+										color="primary" className="button--gray">
 							Cancel
 						</Button>
 						<Button variant="raised"
 										onClick={this.handleConfirm.bind( this, { delete : true } )}
-										color="primary" className="button--green">
+										color="primary" className="button--red">
 							Delete
 						</Button>
 					</DialogActions>
@@ -130,7 +130,6 @@ class DialogPopup extends Component {
 	}
 
 	render() {
-		console.log( this.props.data );
 		if ( this.props.data.dialogType === 'delete' )
 			return this.confirmDialog();
 
