@@ -6,7 +6,7 @@ import Checkbox from 'material-ui/Checkbox';
 import Button from 'material-ui/Button';
 import Delete from '@material-ui/icons/Delete';
 import Edit from '@material-ui/icons/Edit';
-import { toggleTodoStatus, deleteTask } from '../../js/actions';
+import { toggleTodoStatus, deleteTask, updateTask } from '../../js/actions';
 import DialogPopup from '../partials/DialogPopup';
 import Divider from 'material-ui/Divider';
 
@@ -37,8 +37,29 @@ class TodoList extends Component {
 		this.resetState();
 	}
 
+	updateTask( data ) {
+		let exist = this.props.todos.some(( task ) => {
+			return task.title.toLowerCase() === data.title.toLowerCase();
+		} );
+
+		if ( data.action && exist || data.action && data.title === '' ) {
+			let descriptionElem = document.querySelector( '#form-dialog-description' );
+			descriptionElem.style.color = '#f00';
+
+			let text = 'Task title is require!';
+
+			if ( exist ) text = 'Another task with this title already exist try again!';
+
+			descriptionElem.innerHTML = text;
+			return;
+		}
+
+		if ( data.save && data.title !== '' ) this.props.updateTask( { title : data.title, id : this.state.taskID } );
+
+		this.resetState();
+	}
+
 	showDialog( data ) {
-		console.log( data );
 		this.setState( {
 			dialogType : data.type,
 			dialogShow : true,
@@ -63,43 +84,55 @@ class TodoList extends Component {
 		return (
 			<Fragment>
 				<List component="nav" className="task-list">
-				{
-					tasks.map(( task, index ) => {
-						let checked = task.completed ? 'item__text--striped' : '';
+					{
+						!tasks.length ?
+							<ListItem className="item" divider>
+								<ListItemText className='item__text' primary='Task list is empty add your first task' />
+							</ListItem> : null
+					}
+					{
+						tasks.map(( task, index ) => {
+							let checked = task.completed ? 'item__text--striped' : '';
 
-						return (
-							<ListItem key={index} className="item" divider>
-								<Checkbox id={task._id} checked={task.completed} color="default" onChange={this.handleCheckToggle.bind( this )}/>
-								<ListItemText className={`item__text ${checked}`} primary={task.title} />
-								<Divider inset />
-								<Button variant="raised"
-									className="item__button button--green"
-									onClick={this.showDialog.bind( this, { id : task._id, type : 'edit', text : task.title } )}>
-										Edit <Edit />
-								</Button>
-								<Button variant="raised"
-									className="item__button button--red"
-									onClick={this.showDialog.bind( this, { id : task._id, type : 'delete' } )}>
-										Delete <Delete />
-								</Button>
-							</ListItem>
-						);
-					} )
-				}
+							return (
+								<ListItem key={index} className="item" divider>
+									<Checkbox id={task._id} checked={task.completed} color="default" onChange={this.handleCheckToggle.bind( this )}/>
+									<ListItemText className={`item__text ${checked}`} primary={task.title} />
+									<Divider inset />
+									<Button
+										variant="raised"
+										disabled={task.completed}
+										className={`item__button ${!task.completed ? 'button--green' : ''}`}
+										onClick={this.showDialog.bind( this, { id : task._id, type : 'update', text : task.title } )}>
+											Edit <Edit />
+									</Button>
+									<Button variant="raised"
+										className="item__button button--red"
+										onClick={this.showDialog.bind( this, { id : task._id, type : 'delete' } )}>
+											Delete <Delete />
+									</Button>
+								</ListItem>
+							);
+						} )
+					}
 				</List>
 				{
-					showDialogPopup ?	<DialogPopup data={this.state} deleteTask={this.deleteTask.bind( this )}/> : null
+					showDialogPopup ?
+						<DialogPopup
+							data={this.state}
+							deleteTask={this.deleteTask.bind( this )}
+							updateTask={this.updateTask.bind( this )}/> : null
 				}
 			</Fragment>
 		);
 	}
-
 }
 
 TodoList.propTypes = {
 	todos            : PropTypes.array.isRequired,
-	toggleTodoStatus : PropTypes.func.isRequired,
-	deleteTodo       : PropTypes.func.isRequired
+	toggleTodoStatus : PropTypes.func,
+	deleteTodo       : PropTypes.func,
+	updateTask       : PropTypes.func
 };
 
 const mapStateToProps = ( state ) => {
@@ -111,7 +144,8 @@ const mapStateToProps = ( state ) => {
 const mapDispatchToProps = ( dispatch ) => {
 	return {
 		toggleTodoStatus : ( id ) => dispatch( toggleTodoStatus( id )),
-		deleteTodo       : ( id ) => dispatch( deleteTask( id ))
+		deleteTodo       : ( id ) => dispatch( deleteTask( id )),
+		updateTask       : ( task ) => dispatch( updateTask( task ))
 	};
 };
 

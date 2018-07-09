@@ -1,6 +1,4 @@
 export const todos = ( state = [], action ) => {
-	console.log( 'state', state );
-	console.log( 'action', action );
 	switch ( action.type ) {
 		case 'SUCCESS': {
 			return action.todos;
@@ -14,6 +12,19 @@ export const todos = ( state = [], action ) => {
 					return {
 						...task,
 						completed : !task.completed
+					}
+				}
+				return task;
+			} );
+
+			return updatedTasks;
+		}
+		case 'UPDATE_TODO': {
+			const updatedTasks = state.map(( task ) => {
+				if ( task._id === action.todo.id ) {
+					return {
+						...task,
+						title : action.todo.title
 					}
 				}
 				return task;

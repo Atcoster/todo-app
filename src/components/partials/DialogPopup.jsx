@@ -18,12 +18,16 @@ class DialogPopup extends Component {
 		}
 	}
 
-	handleConfirmClose( data ) {
+	handleConfirm( data ) {
 		this.props.deleteTask( data.delete );
 	}
 
-	handleFormDialogClose( data ) {
+	handleFormAddDialog( data ) {
 		this.props.createTask( { save : data.action, title : this.state.title } );
+	}
+
+	handleFormUpdateDialog( data ) {
+		this.props.updateTask( { save : data.action, title : this.state.title } );
 	}
 
 	confirmDialog() {
@@ -43,12 +47,12 @@ class DialogPopup extends Component {
 					</DialogContent>
 					<DialogActions>
 						<Button variant="raised"
-										onClick={this.handleConfirmClose.bind( this, { delete : false } )}
+										onClick={this.handleConfirm.bind( this, { delete : false } )}
 										color="primary" className="button--red">
 							Cancel
 						</Button>
 						<Button variant="raised"
-										onClick={this.handleConfirmClose.bind( this, { delete : true } )}
+										onClick={this.handleConfirm.bind( this, { delete : true } )}
 										color="primary" className="button--green">
 							Delete
 						</Button>
@@ -77,10 +81,10 @@ class DialogPopup extends Component {
 					fullWidth/>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={this.handleFormDialogClose.bind( this, { action : false, value : this.state.title } )}>
+				<Button onClick={this.handleFormAddDialog.bind( this, { action : false, value : this.state.title } )}>
 					Cancel
 				</Button>
-				<Button onClick={this.handleFormDialogClose.bind( this, { action : true, value : this.state.title } )}>
+				<Button onClick={this.handleFormAddDialog.bind( this, { action : true, value : this.state.title } )}>
 					Save
 				</Button>
 			</DialogActions>
@@ -88,31 +92,30 @@ class DialogPopup extends Component {
 		);
 	}
 
-	formEditDialog() {
+	formUpdateDialog() {
+		let value = this.state.title !== '' ? this.state.title : this.props.data.taskTitle;
+
 		return (
 			<Dialog
 			open={true}
 			aria-labelledby="form-dialog-title">
 			<DialogTitle id="form-dialog-title">Edit task</DialogTitle>
 			<DialogContent>
-				<DialogContentText id="form-dialog-description">
-					Edit your task and press the save button!
-				</DialogContentText>
 				<TextField
 					autoFocus
 					margin="dense"
 					id="task-title"
 					label="Task title"
 					type="text"
-					value={this.props.data.taskTitle}
+					value={value}
 					onChange={this.setTaskTitle.bind( this )}
 					fullWidth/>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={this.handleFormDialogClose.bind( this, { action : false, value : this.state.title } )}>
+				<Button onClick={this.handleFormUpdateDialog.bind( this, { action : false, title : this.state.title } )}>
 					Cancel
 				</Button>
-				<Button onClick={this.handleFormDialogClose.bind( this, { action : true, value : this.state.title } )}>
+				<Button onClick={this.handleFormUpdateDialog.bind( this, { action : true, title : this.state.title } )}>
 					Save
 				</Button>
 			</DialogActions>
@@ -125,7 +128,7 @@ class DialogPopup extends Component {
 			title : e.target.value
 		} )
 	}
-	
+
 	render() {
 		console.log( this.props.data );
 		if ( this.props.data.dialogType === 'delete' )
@@ -134,8 +137,8 @@ class DialogPopup extends Component {
 		if ( this.props.data.dialogType === 'add' )
 			return this.formAddDialog();
 
-		if ( this.props.data.dialogType === 'edit' )
-			return this.formEditDialog();
+		if ( this.props.data.dialogType === 'update' )
+			return this.formUpdateDialog();
 
 		return null;
 	}

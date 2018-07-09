@@ -20,7 +20,7 @@ class Header extends Component {
 
 	createTask( data ) {
 		let exist = this.props.todos.some(( task ) => {
-			return task.title === data.title;
+			return task.title.toLowerCase() === data.title.toLowerCase();
 		} );
 
 		if ( data.save && exist || data.save && data.title === '' ) {

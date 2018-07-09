@@ -27,7 +27,7 @@ export const todosFetchData = ( url ) => {
 	};
 }
 
-/** UPDATE ACTIONS */
+/** UPDATE COMPLETED ACTIONS */
 export const toggleSuccess = ( id ) => {
 	return {
 		type : 'TOGGLE_TODO_STATUS',
@@ -35,13 +35,32 @@ export const toggleSuccess = ( id ) => {
 	};
 }
 
-export const toggleTodoStatus = ( event ) => {
+export const updateSuccess = ( task ) => {
+	return {
+		type : 'UPDATE_TODO',
+		todo : task
+	};
+}
+
+export const toggleTodoStatus = ( task ) => {
 	return ( dispatch ) => {
-		axios.put( `${API_URL}/todos/${event.id}`, {
-			completed : event.checked
+		axios.put( `${API_URL}/todos/${task.id}`, {
+			completed : task.checked
 		} )
 		.then(( response ) => {
-			dispatch( toggleSuccess( event.id ));
+			dispatch( toggleSuccess( task.id ));
+		} )
+		.catch(( err ) => dispatch( failed( err )))
+	};
+}
+
+export const updateTask = ( task ) => {
+	return ( dispatch ) => {
+		axios.put( `${API_URL}/todos/${task.id}`, {
+			title : task.title
+		} )
+		.then(() => {
+			dispatch( updateSuccess( task ));
 		} )
 		.catch(( err ) => dispatch( failed( err )))
 	};
